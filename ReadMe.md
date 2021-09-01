@@ -2,7 +2,7 @@
 
 ### Networking capable:
 
-| Processor ->                          | [iMXRT1062](https://github.com/grblHAL/iMXRT1062) | [STM32F7xx](https://github.com/grblHAL/STM32F3xx) | [ESP32](https://github.com/grblHAL/ESP32) | [MSP432E401Y](https://github.com/grblHAL/MSP432E401Y) | [TMC129x](https://github.com/grblHAL/TM4C1294) |
+| Processor ->                          | [iMXRT1062](https://github.com/grblHAL/iMXRT1062) | [STM32F7xx](https://github.com/grblHAL/STM32F7xx) | [ESP32](https://github.com/grblHAL/ESP32) | [MSP432E401Y](https://github.com/grblHAL/MSP432E401Y) | [TMC129x](https://github.com/grblHAL/TM4C1294) |
 |---------------------------------------|---------------------------------------------------|---------------------------------------------------|-------------------------------------------|-------------------------------------------------------|------------------------------------------------|
 | Board                                 | Teensy 4.x                                        | Nucleo-F756ZG                                     |                                           | LaunchPad                                             | LaunchPad                                      |
 | MCU speed \(MHz\)                     | 600                                               | 216                                               | 2x240                                     | 120                                                   | 120                                            |
