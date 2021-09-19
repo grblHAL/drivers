@@ -12,7 +12,7 @@
 | Auto-squared/ganged axes<sup>17</sup> | yes                                               | yes                                               | no                                        | no                                                    | no                                             |
 | Variable spindle                      | yes                                               | yes                                               | yes                                       | yes                                                   | yes                                            |
 | Ramped spindle                        | no                                                | no                                                | yes                                       | yes                                                   | yes                                            |
-| Inverted spindle PWM                  | no                                                | no                                                | yes                                       | yes                                                   | yes                                            |
+| Inverted spindle PWM                  | yes                                               | yes                                               | yes                                       | yes                                                   | yes                                            |
 | RC Servo/ESC for spindle<sup>13</sup> |                                                   | yes                                               | yes                                       | yes                                                   | yes                                            |
 | ModBus spindle<sup>14</sup>           | yes<sup>15</sup>                                  | no                                                | yes                                       | no                                                    | no                                             |
 | Spindle at speed                      | yes                                               | yes                                               | no                                        | no                                                    | no                                             |
@@ -34,7 +34,7 @@
 | Trinamic support<sup>8</sup>          | TBC<sup>9</sup>                                   | TBC<sup>9</sup>                                   | TBC<sup>9</sup>                           | TBC<sup>9</sup>                                       | TBC<sup>9</sup>                                |
 | Runs as FreeRTOS task                 | no                                                | no                                                | yes                                       | option                                                | no                                             |
 | CNC BoosterPack support               | yes<sup>10</sup>                                  | no                                                | yes<sup>10</sup>                          | 2                                                     | 2                                              |
-| WebUI support                         | no                                                | no                                                | yes<sup>12</sup>                          | no                                                    | no                                             |
+| WebUI support                         | yes<sup>12</sup>                                  | yes<sup>12</sup>                                  | yes<sup>12</sup>                          | yes<sup>12</sup>                                      | no                                             |
 | Compiler/IDE                          | Arduino                                           | STMCubeIDE                                        | ESP IDF                                   | CCS                                                   | CCS                                            |
 
 ### With floating point unit \(FPU\):
@@ -124,4 +124,4 @@ The fastest and most deterministic MCUs seems to be iMRXT1062, MSP432E401Y and T
 Excel tables to markdown done with [thisDaveJ](https://thisdavej.com/copy-table-in-excel-and-paste-as-a-markdown-table/) web-based utility.
 
 ---
-2021-06-22
+2021-09-19
