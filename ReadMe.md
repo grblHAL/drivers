@@ -108,7 +108,7 @@ grblHAL does a lot of floating point math, a FPU will improve performance.
 <br><sup>8</sup> Initial version ready for TMC2130 drivers, new [CNC BoosterPack](https://github.com/terjeio/CNC_Boosterpack) design for Texas Instrument LaunchPads ready and initial testing ok.
 <br><sup>9</sup> Implementation provided for TMC2130, with initial focus on [I2C](https://github.com/terjeio/Trinamic_TMC2130_I2C_SPI_Bridge) interfaces. Work in good progress - code published.
 <br><sup>10</sup> Via "motherboard" that accommodates [CNC BoosterPack](https://github.com/terjeio/CNC_Boosterpack) and processor board. Prototypes made, includes 8-bit I2C GPIO expander \(not available/needed for STM32F1xx or IMXRT1062\). "motherboards" has option for isolated level-shifted spindle PWM or DC output.  BoosterPack has an onboard EEPROM and an I2C level shifter.
-<br><sup>11</sup> Requires 128KB of flash \(STM32F103CB\), many STM32F1038B based Bluepill boards has that. Not recommended due to limited memories, use a STM32F303 or STM32F411 based Blackpill instead for a board with the same form factor as Red- and Bluepills. 
+<br><sup>11</sup> Requires 128KB of flash \(STM32F103CB\), some STM32F103C8 based Bluepill boards has that. Not recommended due to limited memories, use a STM32F303 or STM32F411 based Blackpill instead for a board with the same form factor as Red- and Bluepills. 
 <br><sup>12</sup> Luc's [ESP3D-WEBUI](https://github.com/luc-github/ESP3D-webui). Work in progress, has sopport for both v2 and v3. 
 <br><sup>13</sup> Set `$33=50` (PWM frequency), `$34=5`, `$35=5` and `$36=10` to generate a "standard" PWM signal: 20ms repetition rate, 1 - 2ms pulse length range. 
 <br><sup>14</sup> [Supports a number of VFDs](https://github.com/grblHAL/Plugins_spindle/). Defaults to 19200 baud, implicit spindle at speed. Not supported for all alternative board map files. 
@@ -125,4 +125,4 @@ The fastest and most deterministic MCUs seems to be iMRXT1062, MSP432E401Y and T
 Excel tables to markdown done with [thisDaveJ](https://thisdavej.com/copy-table-in-excel-and-paste-as-a-markdown-table/) web-based utility.
 
 ---
-2022-09-17
+2022-09-28
