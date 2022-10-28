@@ -1,0 +1,261 @@
+{
+"drivers": [
+  {
+      "name": "iMXRT1062 (Teensy 4.x)",
+      "folder": "iMXRT1062",
+      "driverURL": "https://github.com/grblHAL//iMXRT1062"
+  },
+  {
+      "name": "STM32F1xx",
+      "folder": "STM32F1xx",
+      "driverURL": "https://github.com/grblHAL//STM32F1xx"
+  },
+  {
+      "name": "STM32F4xx",
+      "folder": "STM32F4xx",
+      "driverURL": "https://github.com/grblHAL//STM32F4xx"
+  },
+  {
+      "name": "STM32F7xx",
+      "folder": "STM32F7xx",
+      "driverURL": "https://github.com/grblHAL/STM32F7xx"
+  },
+  {
+      "name": "STM32H7xx",
+      "folder": "STM32H7xx",
+      "driverURL": "https://github.com/dresco/STM32H7xx"
+  },
+  {
+      "name": "ESP32",
+      "folder": "ESP32",
+      "driverURL": "https://github.com/grblHAL/ESP32"
+  },
+  {
+      "name": "SAM3X8E (Arduino Due)",
+      "folder": "SAM3X8E",
+      "driverURL": "https://github.com/grblHAL/SAM3X8E"
+  },
+  {
+      "name": "RP2040 (Pi Pico & Pi Pico W)",
+      "folder": "RP2040",
+      "driverURL": "https://github.com/grblHAL/RP2040"
+  }
+  ],
+  "tabs": [
+    { "tab_id": 0, "name": "General" },
+    { "tab_id": 1, "name": "Plugins" },
+    { "tab_id": 2, "name": "Network/WebUI" },
+    { "tab_id": 3, "name": "Advanced features" }
+  ],
+  "resource_monitor": [
+    "axes",
+    "serial_ports",
+    "analog_in",
+    "analog_out",
+    "digital_in",
+    "digital_out"
+  ],
+  "driver": [
+    { "id": "usb_cdc", "name": "Native USB communication", "symbol": { "name": "USB_SERIAL_CDC", "type": "uint", "min": 0, "max": 2 } }
+  ],
+  "core" : [
+    { "id": "usb_cdc", "name": "Connection", "symbol": { "name": "USB_SERIAL_CDC", "type": "dropdown" },
+      "options": [
+        { "id": "usb_cdc", "name": "Native USB", "symbol": { "name": "USB_SERIAL_CDC", "value": 1 }, "resources": { "usb_cdc": 1, "serial_ports": 0 } },
+        { "id": "uart", "name": "(Virtual) UART", "symbol": { "name": "USB_SERIAL_CDC", "value": 0 }, "resources": { "usb_cdc": 0, "serial_ports": 1 } }
+      ]
+    },
+    { "id": "n_axis", "name": "Number of axes", "symbol": { "name": "N_AXIS", "type": "dropdown", "min": 3, "max": 8 },
+      "options": [
+        { "name": "3", "symbol": { "name": "X_AXIS_OPT" } }
+      ]
+    },
+    { "id": "n_axis", "name": "Remap ABC to UVW", "symbol": { "name": "AXIS_REMAP_ABC2UVW", "value": 1 },
+      "resources": { "axes": 4 }
+    },
+    { "id": "x_axis", "name": "X-axis", "symbol": { "name": "X_AXIS_OPT", "type": "dropdown" },
+      "options": [
+        { "name": "Single motor", "symbol": { "name": "X_AXIS_OPT" } },
+        { "name": "Ganged motors", "symbol": { "name": "X_GANGED", "value": 1 } },
+        { "name": "Auto-squared", "symbol": { "name": "X_AUTO_SQUARE", "value": 1 } }
+      ]
+    },
+    { "id": "y_axis", "name": "Y-axis", "symbol": { "name": "Y_AXIS_OPT", "type": "dropdown" },
+      "options": [
+        { "name": "Single motor", "symbol": { "name": "Y_AXIS_OPT" } },
+        { "name": "Ganged motors", "symbol": { "name": "Y_GANGED", "value": 1 } },
+        { "name": "Auto-squared", "symbol": { "name": "Y_AUTO_SQUARE", "value": 1 } }
+      ]
+    },
+    { "id": "z_axis", "name": "Z-axis", "symbol": { "name": "Z_AXIS_OPT", "type": "dropdown" },
+      "options": [
+        { "name": "Single motor", "symbol": { "name": "Z_AXIS_OPT" } },
+        { "name": "Ganged motors", "symbol": { "name": "Z_GANGED", "value": 1 } },
+        { "name": "Auto-squared", "symbol": { "name": "Z_AUTO_SQUARE", "value": 1 } }
+      ]
+    },
+    { "id": "probe", "name": "Probe input", "symbol": { "name": "PROBE_ENABLE", "type": "bool" }, "resources": { "probe": 1 } },
+    { "id": "safety_door", "name": "Safety door input", "symbol": { "name": "SAFETY_DOOR_ENABLE", "type": "bool" }, "resources": { "safety_door": 1 } },
+    { "id": "compat_level", "tab_id": 3, "name": "Compatibility level", "symbol": { "name": "COMPATIBILITY_LEVEL", "type": "dropdown" }, "URL": "https://github.com/grblHAL/core/wiki/Compatibility-level",
+      "options": [
+        { "name": "grblHAL", "symbol": { "name": "COMPATIBILITY_LEVEL" } },
+        { "name": "Grbl id (1)", "symbol": { "name": "COMPATIBILITY_LEVEL", "value": 1 } },
+        { "name": "Grbl id + settings (2)", "symbol": { "name": "COMPATIBILITY_LEVEL", "value": 2 } },
+        { "name": "Grbl complete (10)", "symbol": { "name": "COMPATIBILITY_LEVEL", "value": 10 } }
+      ]
+    },
+    { "id": "tool_offset", "tab_id": 3, "name": "TLO report", "symbol": { "name": "TOOL_LENGTH_OFFSET_AXIS", "type": "dropdown" },
+      "options": [
+        { "name": "All axes", "symbol": { "name": "TOOL_LENGTH_OFFSET_AXIS" } },
+        { "name": "Z-axis", "symbol": { "name": "TOOL_LENGTH_OFFSET_AXIS", "value": 2 } },
+        { "name": "X-axis", "symbol": { "name": "TOOL_LENGTH_OFFSET_AXIS", "value": 0 } },
+        { "name": "Y-axis", "symbol": { "name": "TOOL_LENGTH_OFFSET_AXIS", "value": 1 } }
+      ]
+    },
+    { "id": "backlash_comp", "tab_id": 3, "name": "Backlash compensation", "symbol": { "name": "ENABLE_BACKLASH_COMPENSATION", "type": "bool" } },
+    { "id": "sleep", "tab_id": 3, "name": "Sleep mode", "symbol": { "name": "SLEEP_ENABLE", "type": "bool" } },
+    { "id": "probe_overshoot", "tab_id": 3, "name": "Minimize probe overshoot", "symbol": { "name": "MINIMIZE_PROBE_OVERSHOOT", "type": "bool" } },
+    { "id": "ngc_expressions", "tab_id": 3, "name": "RS274 NGC expression support", "symbol": { "name": "NGC_EXPRESSIONS_ENABLE", "type": "bool" },
+      "tooltip": "RS274 NGC + LinuxCNC extensions. Conditionals, looping and subroutines are not supported."
+    },
+    { "id": "bbuffer_dynamic", "tab_id": 3, "name": "Configurable planner buffer size", "symbol": { "name": "BLOCK_BUFFER_DYNAMIC", "type": "bool" } },
+    { "id": "kinematics", "tab_id": 3, "name": "Kinematics", "symbol": { "name": "KINEMATICS_API", "type": "dropdown" },
+      "options": [
+        { "name": "Cartesian", "symbol": { "name": "CARTESIAN" } },
+        { "name": "CoreXY", "symbol": { "name": "COREXY", "value": "" } },
+        { "name": "Wall plotter", "symbol": { "name": "WALL_PLOTTER", "value": "" } }
+      ]
+    }
+  ],
+  "plugins": [
+    { "id": "motors", "name": "Trinamic drivers", "symbol": { "name": "TRINAMIC_ENABLE", "type": "dropdown" }, "URL": "https://github.com/grblHAL/Plugins_motor/",
+      "options": [
+        { "name": "Disabled", "symbol": { "name": "TRINAMIC_ENABLE" }, "resources": { "serial_ports": 0, "soft_uart": 0, "spi": 0 } },
+        { "name": "TMC2130", "symbol": { "name": "TRINAMIC_ENABLE", "value": 2130 }, "tmc_com": "spi" },
+        { "name": "TMC2209", "symbol": { "name": "TRINAMIC_ENABLE", "value": 2209 }, "tmc_com": "uart" },
+        { "name": "TMC5160", "symbol": { "name": "TRINAMIC_ENABLE", "value": 5160 }, "tmc_com": "spi" }
+      ]
+    },
+    { "id": "motors", "name": "Trinamic mode", "symbol": { "name": "TRINAMIC_MODE", "type": "dropdown" },
+       "options": [
+        { "name": "set by board", "symbol": { "name": "TRINAMIC_MODE" } },
+        { "name": "SPI common CS", "symbol": { "name": "TRINAMIC_SPI_ENABLE", "value": 1 }, "tmc_mode": "spi_chained", "resources": { "serial_ports": 0, "soft_uart": 0, "spi": 1 } },
+        { "name": "SPI separate CS", "symbol": { "name": "TRINAMIC_SPI_ENABLE", "value": 2 }, "tmc_mode": "spi_cs", "resources": { "serial_ports": 0, "soft_uart": 0, "spi": 1 } },
+        { "name": "UART soft adress", "symbol": { "name": "TRINAMIC_UART_ENABLE", "value": 1 }, "tmc_mode": "uart_addr", "resources": { "serial_ports": 1, "soft_uart": 0, "spi": 0 } },
+        { "name": "UART hard adress", "symbol": { "name": "TRINAMIC_UART_ENABLE", "value": 2 }, "tmc_mode": "uart_n", "resources": { "serial_ports": 0, "soft_uart": 1, "spi": 0 } }
+      ]
+    },
+    { "id": "eeprom", "tab_id": 1, "name": "Settings EEPROM", "symbol": {"name": "EEPROM_ENABLE", "type": "dropdown" }, "URL": "https://github.com/grblHAL/Plugin_EEPROM/",
+      "resources": { "i2c": 1 },
+      "options": [
+        { "name": "No", "symbol": { "name": "EEPROM_ENABLE" }, "resources": { "i2c": 0 } },
+        { "name": "24x16 (2K)", "symbol": { "name": "EEPROM_ENABLE", "value": 1 } },
+        { "name": "24x32 (4K)", "symbol": { "name": "EEPROM_ENABLE", "value": 3 } },
+        { "name": "24x64 (8K) - 24x256 (32K)", "symbol": { "name": "EEPROM_ENABLE", "value": 2 } }
+      ]
+    },
+    { "id": "eeprom", "tab_id": 1, "name": "EEPROM is FRAM", "symbol": {"name": "EEPROM_IS_FRAM", "type": "bool" } },
+    { "id": "spindle", "name": "Spindle", "symbol": { "name": "N_SPINDLE", "type": "dropdown" }, "URL": "https://github.com/grblHAL/Plugins_spindle/",
+      "options": [
+        { "id": "pwm", "name": "PWM", "symbol": { "name": "VFD_ENABLE" }, "resources": { "pwm_spindle": 1, "serial_ports": 0 } },
+        { "id": "vfdall", "name": "All", "symbol": { "name": "VFD_ENABLE", "value": -1 } },
+        { "id": "vfd1", "name": "Huanyang v1", "symbol": { "name": "VFD_ENABLE", "value": 1 } },
+        { "id": "vfd2", "name": "Huanyang P2A", "symbol": { "name": "VFD_ENABLE", "value": 2 } },
+        { "id": "vfd3", "name": "Durapulse GS20", "symbol": { "name": "VFD_ENABLE", "value": 3 } },
+        { "id": "vfd4", "name": "Yalang YS620", "symbol": { "name": "VFD_ENABLE", "value": 4 } },
+        { "id": "vfd5", "name": "MODVFD", "symbol": { "name": "VFD_ENABLE", "value": 5 } },
+        { "id": "vfd6", "name": "H-100", "symbol": { "name": "VFD_ENABLE", "value": 6 } }
+      ]
+    },
+    { "id": "modbus", "name": "ModBus", "symbol": { "name": "MODBUS_ENABLE", "type": "dropdown" }, "URL": "https://github.com/grblHAL/Plugins_spindle/",
+      "resources": { "serial_ports": 1 }, 
+      "options": [
+        { "id": "modbusoff", "name": "Disabled", "symbol": { "name": "MODBUS_BAUDRATE", "value": -1 }, "resources": { "serial_ports": 0 } },
+        { "id": "modbus0", "name": "2400 baud", "symbol": { "name": "MODBUS_BAUDRATE", "value": 0 }, "resources": { "serial_ports": 1 } },
+        { "id": "modbus1", "name": "4800 baud", "symbol": { "name": "MODBUS_BAUDRATE", "value": 1 }, "resources": { "serial_ports": 1 } },
+        { "id": "modbus2", "name": "9600 baud", "symbol": { "name": "MODBUS_BAUDRATE", "value": 2 }, "resources": { "serial_ports": 1 } },
+        { "id": "modbus3", "name": "19200 baud", "symbol": { "name": "MODBUS_BAUDRATE", "value": 3 }, "resources": { "serial_ports": 1 } },
+        { "id": "modbus4", "name": "38400 baud", "symbol": { "name": "MODBUS_BAUDRATE", "value": 4 }, "resources": { "serial_ports": 1 } },
+        { "id": "modbus5", "name": "115200 baud", "symbol": { "name": "MODBUS_BAUDRATE", "value": 5 }, "resources": { "serial_ports": 1 } }
+      ]
+    },
+    { "id": "modbus", "name": "ModBus RX/TX direction output", "symbol": { "name": "MODBUS_DIR_AUX", "type": "bool" },
+      "resources": { "digital_out": 1 }
+    },
+    { "id": "webui", "tab_id": 2, "name": "WebUI", "symbol": { "name": "WEBUI_ENABLE", "type": "dropdown" }, "URL": "https://github.com/grblHAL/Plugin_WebUI/",
+      "resources": { "networking": 1, "sdcard": 1 },
+      "options": [
+        { "id": "webui3", "name": "Disabled", "symbol": { "name": "WEBUI_ENABLE" }, "resources": { "networking": 0, "sdcard": 0 } },
+        { "id": "webui3", "name": "v3", "symbol": { "name": "WEBUI_ENABLE", "value": 3 } },
+        { "id": "webui23", "name": "v2+v3", "symbol": { "name": "WEBUI_ENABLE", "value": 1 } },
+        { "id": "webui2", "name": "v2", "symbol": { "name": "WEBUI_ENABLE", "value": 2 } }
+      ]
+    },
+    { "id": "webui", "tab_id": 2, "name": "WebUI authentication", "symbol": { "name": "WEBUI_AUTH_ENABLE", "type": "bool" } },
+    { "id": "eth_networking", "tab_id": 2, "name": "Ethernet", "symbol": { "name": "ETHERNET_ENABLE", "type": "bool" }, "pio_env": 1, "URL": "https://github.com/grblHAL/Plugin_networking/",
+      "resources": { "ethernet": 1 },
+      "options": [
+        { "id": "telnetd", "name": "Telnet server", "symbol": { "name": "TELNET_ENABLE", "type": "bool" } },
+        { "id": "websocked", "name": "WebSocket server", "symbol": { "name": "WEBSOCKET_ENABLE", "type": "bool" } },
+        { "id": "ftpd", "name": "FTP server", "symbol": { "name": "FTP_ENABLE", "type": "bool" }, "resources": { "sdcard": 1 } },
+        { "id": "httpd", "name": "HTTP server", "symbol": { "name": "HTTP_ENABLE", "type": "bool" }, "resources": { "sdcard": 1 } },
+        { "id": "webdav", "name": "WebDAV protocol", "symbol": { "name": "WEBDAV_ENABLE", "type": "bool" }, "resources": { "sdcard": 1 } },
+        { "id": "mdns", "name": "mDNS protocol", "symbol": { "name": "MDNS_ENABLE", "type": "bool" } },
+        { "id": "ssdpd", "name": "SSDP protocol", "symbol": { "name": "SSDP_ENABLE", "type": "bool" } }
+      ]
+    },
+    { "id": "wifi_networking", "tab_id": 2, "name": "WiFi", "symbol": { "name": "WIFI_ENABLE", "type": "bool" }, "pio_env": 1, "URL": "https://github.com/grblHAL/Plugin_networking/",
+      "resources": { "wifi": 1 },
+      "options": [
+        { "id": "telnetd", "name": "Telnet server", "symbol": { "name": "TELNET_ENABLE", "type": "bool" } },
+        { "id": "websocked", "name": "WebSocket server", "symbol": { "name": "WEBSOCKET_ENABLE", "type": "bool" } },
+        { "id": "ftpd", "name": "FTP server", "symbol": { "name": "FTP_ENABLE", "type": "bool" }, "resources": { "sdcard": 1 } },
+        { "id": "httpd", "name": "HTTP server", "symbol": { "name": "HTTP_ENABLE", "type": "bool" }, "resources": { "sdcard": 1 } },
+        { "id": "webdav", "name": "WebDAV protocol", "symbol": { "name": "WEBDAV_ENABLE", "type": "bool" }, "resources": { "sdcard": 1 } },
+        { "id": "mdns", "name": "mDNS protocol", "symbol": { "name": "MDNS_ENABLE", "type": "bool" } },
+        { "id": "ssdpd", "name": "SSDP protocol", "symbol": { "name": "SSDP_ENABLE", "type": "bool" } }
+      ]
+    },
+    { "id": "wifi_networking", "tab_id": 2, "name": "WiFi mode", "symbol": { "name": "WIFI_MODE", "type": "dropdown" }, "URL": "https://github.com/grblHAL/Plugin_networking/",
+      "resources": { "wifi": 1 },
+      "options": [
+        { "id": "wifi_sta", "name": "Station (STA)", "symbol": { "name": "WIFI_SOFTAP", "value": 0 } },
+        { "id": "wifi_ap", "name": "Access Point (AP)", "symbol": { "name": "WIFI_SOFTAP", "value": 1 } },
+        { "id": "wifi_apsta", "name": "Access point + station", "symbol": { "name": "WIFI_SOFTAP", "value": 1 } }
+      ]
+    },
+    { "id": "sdcard", "tab_id": 1, "name": "SD card", "symbol": { "name": "SDCARD_ENABLE", "type": "dropdown" }, "URL": "https://github.com/grblHAL/Plugin_plasma/",
+      "options": [
+        { "name": "Disabled", "symbol": { "name": "SDCARD_ENABLE" } },
+        { "name": "Enable", "symbol": { "name": "SDCARD_ENABLE", "value": 1 } },
+        { "name": "With YModem", "symbol": { "name": "SDCARD_ENABLE", "value": 2 } }
+      ]
+    },
+    { "id": "encoder", "tab_id": 1, "name": "Encoder", "symbol": { "name": "ENCODER_ENABLE", "type": "bool" }, "resources": { "digital_in": 3}, "URL": "https://github.com/grblHAL/Plugin_encoder/" },
+    { "id": "fans", "tab_id": 1, "name": "Fan", "symbol": { "name": "FANS_ENABLE", "type": "bool" }, "URL": "https://github.com/grblHAL/Plugin_fans/",
+      "resources": { "digital_out": 1}
+    },
+    { "id": "keypad", "tab_id": 1, "name": "Keypad", "symbol": { "name": "KEYPAD_ENABLE", "type": "dropdown" }, "URL": "https://github.com/grblHAL/Plugin_I2C_keypad/",
+       "options": [
+        { "name": "Disabled", "symbol": { "name": "KEYPAD_ENABLE" }, "resources": { "i2c": 0, "digital_in": 0, "serial_ports": 0 } },
+        { "name": "I2C", "symbol": { "name": "KEYPAD_ENABLE", "value": 1 }, "resources": { "i2c": 1, "digital_in": 1, "serial_ports": 0 } },
+        { "name": "UART", "symbol": { "name": "KEYPAD_ENABLE", "value": 2 }, "resources": { "i2c": 0, "digital_in": 0, "serial_ports": 1 } }
+      ]
+    },
+    { "id": "laser_ppi", "tab_id": 1, "name": "Laser PPI", "symbol": { "name": "PPI_ENABLE", "type": "bool" }, "URL": "https://github.com/grblHAL/Plugins_laser/#laser-ppi" },
+    { "id": "laser_cluster", "tab_id": 1, "name": "LaserBurn cluster", "symbol": { "name": "LB_CLUSTERS_ENABLE", "type": "bool" }, "URL": "https://github.com/grblHAL/Plugins_laser/#lightburn-clusters" },
+    { "id": "laser_coolant", "tab_id": 1, "name": "Laser coolant", "symbol": { "name": "COOLANT_ENABLE", "type": "bool" }, "URL": "https://github.com/grblHAL/Plugins_laser/#laser-coolant",
+      "resources": { "digital_in": 1 }
+    },
+    { "id": "bluetooth_bridge", "tab_id": 1, "name": "HC-05 Bluetooth bridge", "symbol": { "name": "BLUETOOTH_ENABLE", "type": "bool" }, "URL": "https://github.com/grblHAL/Plugins_Bluetooth/",
+      "resources": { "serial_port": 1, "digital_in": 1 } },
+    { "id": "odometer", "tab_id": 1, "name": "Odometer", "symbol": { "name": "ODOMETER_ENABLE", "type": "bool" }, "URL": "https://github.com/grblHAL/Plugin_odometer/" },
+    { "id": "openpnp", "tab_id": 1, "name": "OpenPNP", "symbol": { "name": "OPENPNP_ENABLE", "type": "bool" }, "URL": "https://github.com/grblHAL/Plugin_openpnp/" },
+    { "id": "plasma", "tab_id": 1, "name": "Plasma/THC", "symbol": { "name": "PLASMA_ENABLE", "type": "bool" }, "URL": "https://github.com/grblHAL/Plugin_plasma/",
+      "resources": { "analog_in": 1, "digital_in": 3 }
+    },
+    { "id": "datron", "tab_id": 1, "name": "Datron lights", "symbol": { "name": "RGB_ENABLE", "type": "bool" }, "pio_env": 1, "URL": "https://github.com/5ocworkshop/grblhal-rgb-plugin",
+      "resources": { "digital_out": 3 }
+    }
+  ]
+}
