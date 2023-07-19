@@ -46,6 +46,7 @@
     { "tab_id": 1, "name": "Plugins" },
     { "tab_id": 2, "name": "Network/WebUI" },
     { "tab_id": 3, "name": "Advanced features" }
+    { "tab_id": 4, "name": "3rd party plugins" }
   ],
   "resource_monitor": [
     "axes",
@@ -282,9 +283,9 @@
       "resources": { "analog_in": 0, "digital_in": 3 }
     },
     { "id": "embroidery", "tab_id": 1, "name": "Embroidery", "symbol": { "name": "EMBROIDERY_ENABLE", "type": "bool" }, "URL": "https://github.com/grblHAL/Plugin_embroidery/",
-      "resources": { "digital_in": 1, "sdcard": 1 }
+      "resources": { "sdcard": 1 }
     },
-    { "id": "datron", "tab_id": 1, "name": "Datron lights", "symbol": { "name": "RGB_ENABLE", "type": "bool" }, "pio_env": 1, "URL": "https://github.com/5ocworkshop/grblhal-rgb-plugin",
+    { "id": "datron", "tab_id": 4, "name": "Datron lights", "symbol": { "name": "RGB_ENABLE", "type": "bool" }, "pio_env": 1, "URL": "https://github.com/5ocworkshop/grblhal-rgb-plugin",
       "resources": { "digital_out": 3 }
     }
   ]
