@@ -45,7 +45,7 @@
     { "tab_id": 0, "name": "General" },
     { "tab_id": 1, "name": "Plugins" },
     { "tab_id": 2, "name": "Network/WebUI" },
-    { "tab_id": 3, "name": "Advanced features" }
+    { "tab_id": 3, "name": "Advanced features" },
     { "tab_id": 4, "name": "3rd party plugins" }
   ],
   "resource_monitor": [
@@ -106,6 +106,7 @@
         { "name": "Grbl complete (10)", "symbol": { "name": "COMPATIBILITY_LEVEL", "value": 10 } }
       ]
     },
+    { "id": "compat_level", "tab_id": 3, "name": "Reset input as E-Stop", "symbol": { "name": "ESTOP_ENABLE", "type": "bool" }, "resources": { "estop": 1 } },
     { "id": "tool_offset", "tab_id": 3, "name": "TLO report", "symbol": { "name": "TOOL_LENGTH_OFFSET_AXIS", "type": "dropdown" },
       "options": [
         { "name": "All axes", "symbol": { "name": "TOOL_LENGTH_OFFSET_AXIS" } },
@@ -115,6 +116,8 @@
       ]
     },
     { "id": "backlash_comp", "tab_id": 3, "name": "Backlash compensation", "symbol": { "name": "ENABLE_BACKLASH_COMPENSATION", "type": "bool" } },
+    { "id": "disable_rst_all", "tab_id": 3, "name": "Disable $RST=*, reset all settings", "symbol": { "name": "ENABLE_RESTORE_NVS_WIPE_ALL", "type": "bool" } },
+    { "id": "disable_rst_dflt", "tab_id": 3, "name": "Disable $RST=$, reset core settings", "symbol": { "name": "ENABLE_RESTORE_NVS_DEFAULT_SETTINGS", "type": "bool" } },
     { "id": "sleep", "tab_id": 3, "name": "Sleep mode", "symbol": { "name": "DEFAULT_SLEEP_ENABLE", "type": "bool" } },
     { "id": "spindle_sync", "tab_id": 3, "name": "Spindle sync", "symbol": { "name": "SPINDLE_SYNC_ENABLE", "type": "bool" }, "URL": "https://github.com/grblHAL/core/wiki/Spindle-sync",
       "resources": { "spindle_sync": 1 },
@@ -124,13 +127,16 @@
     },
     { "id": "probe_overshoot", "tab_id": 3, "name": "Minimize probe overshoot", "symbol": { "name": "MINIMIZE_PROBE_OVERSHOOT", "type": "bool" } },
     { "id": "ngc_expressions", "tab_id": 3, "name": "RS274 NGC expression support", "symbol": { "name": "NGC_EXPRESSIONS_ENABLE", "type": "bool" },
-      "tooltip": "RS274 NGC + LinuxCNC extensions. Conditionals, looping and subroutines are not supported."
+      "URL": "https://github.com/grblHAL/core/wiki/Expressions-and-flow-control",
+      "tooltip": "RS274 NGC + LinuxCNC extensions. Conditionals, looping and subroutines are supported when streaming from a SD card."
     },
     { "id": "rotary_fix", "tab_id": 3, "name": "Rotary axis feed rate fix", "symbol": { "name": "ROTARY_FIX", "type": "bool" }, "URL": "https://github.com/grblHAL/core/discussions/241" },
     { "id": "kinematics", "tab_id": 3, "name": "Kinematics", "symbol": { "name": "KINEMATICS_API", "type": "dropdown" },
       "options": [
         { "name": "Cartesian", "symbol": { "name": "CARTESIAN" } },
         { "name": "CoreXY", "symbol": { "name": "COREXY", "value": "1" } },
+        { "name": "Delta", "symbol": { "name": "DELTA_ROBOT", "value": "1" } },
+        { "name": "Polar", "symbol": { "name": "POLAR_ROBOT", "value": "1" } },
         { "name": "Wall plotter", "symbol": { "name": "WALL_PLOTTER", "value": "1" } }
       ]
     }
@@ -284,9 +290,59 @@
     },
     { "id": "embroidery", "tab_id": 1, "name": "Embroidery", "symbol": { "name": "EMBROIDERY_ENABLE", "type": "bool" }, "URL": "https://github.com/grblHAL/Plugin_embroidery/",
       "resources": { "sdcard": 1 }
-    },
-    { "id": "datron", "tab_id": 4, "name": "Datron lights", "symbol": { "name": "RGB_ENABLE", "type": "bool" }, "pio_env": 1, "URL": "https://github.com/5ocworkshop/grblhal-rgb-plugin",
+    }
+  ],
+  "thirdparty": [
+    { "id": "datron", "tab_id": 4, "name": "Datron lights", "symbol": { "name": "STATUS_LIGHT_ENABLE", "type": "bool" }, "thirdparty": 1, "URL": "https://github.com/5ocworkshop/grblhal-rgb-plugin",
       "resources": { "digital_out": 3 }
+    },
+    { "id": "panel", "tab_id": 4, "name": "Panel", "symbol": { "name": "PANEL_ENABLE", "type": "bool" }, "thirdparty": 1, "URL": "https://github.com/dresco/Plugin_panel",
+      "resources": { "modbus_rtu": 1 },
+      "symbols": [ { "name": "MODBUS_MAX_ADU_SIZE", "value": "64" } ]
+    },
+    { "id": "picoHAL", "tab_id": 4, "name": "PicoHAL", "symbol": { "name": "PICOHAL_ENABLE", "type": "bool" }, "thirdparty": 1, "URL": "https://github.com/Expatria-Technologies/Plugins_picoHAL",
+      "resources": { "modbus_rtu": 1 }
+    },
+    { "id": "probept", "tab_id": 4, "name": "Probing add-on", "symbol": { "name": "PROBE_PROTECT_ENABLE", "type": "bool" }, "thirdparty": 1, "URL": "https://github.com/Expatria-Technologies/grblhal_probe_plugin",
+      "resources": { "digital_in": 1 }
+    },
+    { "id": "templates", "tab_id": 4, "name": "Template plugins", "symbol": { "name": "TEMPLATE_ENABLE", "type": "dropdown" }, "thirdparty": 1, "URL": "https://github.com/grblHAL/Templates/tree/master/my_plugin",
+      "options": [
+        { "name": "None", "symbol": { "name": "TEMPLATE_ENABLE" } },
+        { "name": "Solenoid spindle", "symbol": { "name": "TEMPLATE_ENABLE", "value": 1 }, "URL": "https://github.com/grblHAL/Templates/tree/master/my_plugin/Solenoid_spindle",
+          "symbols": [ { "name": "ADD_MY_PLUGIN", "value": "1" } ]
+        },
+        { "name": "Select 2nd probe via relay", "symbol": { "name": "TEMPLATE_ENABLE", "value": 2 }, "URL": "https://github.com/grblHAL/Templates/tree/master/my_plugin/Probe_select",
+          "resources": { "digital_out": 1 },
+          "symbols": [ { "name": "ADD_MY_PLUGIN", "value": "1" } ]
+        },
+        { "name": "Select 2nd probe via aux input", "symbol": { "name": "TEMPLATE_ENABLE", "value": 2 }, "URL": "https://github.com/grblHAL/Templates/tree/master/my_plugin/Probe_select2",
+          "resources": { "digital_in": 1 },
+          "symbols": [ { "name": "ADD_MY_PLUGIN", "value": "1" } ]
+        },
+        { "name": "Motor power monitor", "symbol": { "name": "TEMPLATE_ENABLE", "value": 3 }, "URL": "https://github.com/grblHAL/Templates/tree/master/my_plugin/Motor_power_monitor",
+          "resources": { "digital_in": 1 },
+          "symbols": [ { "name": "ADD_MY_PLUGIN", "value": "1" } ]
+        },
+        { "name": "Pause on SD file run", "symbol": { "name": "TEMPLATE_ENABLE", "value": 4 }, "URL": "https://github.com/grblHAL/Templates/tree/master/my_plugin/Pause_on_SD_file_run",
+          "symbols": [ { "name": "ADD_MY_PLUGIN", "value": "1" } ]
+        },
+        { "name": "Realtime report timestamp", "symbol": { "name": "TEMPLATE_ENABLE", "value": 5 }, "URL": "https://github.com/grblHAL/Templates/tree/master/my_plugin/Realtime_report_timestamp",
+          "symbols": [ { "name": "ADD_MY_PLUGIN", "value": "1" } ]
+        },
+        { "name": "Stepper enable control", "symbol": { "name": "TEMPLATE_ENABLE", "value": 6 }, "URL": "https://github.com/grblHAL/Templates/tree/master/my_plugin/Stepper_enable_control",
+          "symbols": [ { "name": "ADD_MY_PLUGIN", "value": "1" } ]
+        },
+        { "name": "Prosessor load", "symbol": { "name": "TEMPLATE_ENABLE", "value": 7 }, "URL": "https://github.com/grblHAL/Templates/tree/master/my_plugin/MCU_load",
+          "symbols": [ { "name": "ADD_MY_PLUGIN", "value": "1" } ]
+        },
+        { "name": "Keep last selected tool over reboot", "symbol": { "name": "TEMPLATE_ENABLE", "value": 7 }, "URL": "https://github.com/grblHAL/Templates/tree/master/my_plugin/Persistent_tool",
+          "symbols": [ { "name": "ADD_MY_PLUGIN", "value": "1" } ]
+        },
+        { "name": "HPGL extension", "symbol": { "name": "TEMPLATE_ENABLE", "value": 8 }, "URL": "https://github.com/grblHAL/Templates/tree/master/my_plugin/hpgl",
+          "symbols": [ { "name": "ADD_MY_PLUGIN", "value": "1" } ]
+        }
+      ]
     }
   ]
 }
