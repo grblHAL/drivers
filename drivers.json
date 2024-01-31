@@ -1,52 +1,94 @@
 {
   "drivers": [
-  {
+    {
       "name": "iMXRT1062 (Teensy 4.x)",
       "folder": "iMXRT1062",
       "driverURL": "https://github.com/grblHAL/iMXRT1062"
-  },
-  {
+    },
+    {
       "name": "STM32F1xx",
       "folder": "STM32F1xx",
       "driverURL": "https://github.com/grblHAL/STM32F1xx"
-  },
-  {
+    },
+    {
       "name": "STM32F4xx",
       "folder": "STM32F4xx",
-      "driverURL": "https://github.com/grblHAL/STM32F4xx"
-  },
-  {
+      "driverURL": "https://github.com/grblHAL//STM32F4xx"
+    },
+    {
       "name": "STM32F7xx",
       "folder": "STM32F7xx",
       "driverURL": "https://github.com/grblHAL/STM32F7xx"
-  },
-  {
+    },
+    {
       "name": "STM32H7xx",
       "folder": "STM32H7xx",
       "driverURL": "https://github.com/dresco/STM32H7xx"
-  },
-  {
+    },
+    {
       "name": "ESP32",
       "folder": "ESP32",
       "driverURL": "https://github.com/grblHAL/ESP32"
-  },
-  {
+    },
+    {
       "name": "SAM3X8E (Arduino Due)",
       "folder": "SAM3X8E",
       "driverURL": "https://github.com/grblHAL/SAM3X8E"
-  },
-  {
+    },
+    {
       "name": "RP2040 (Pi Pico & Pi Pico W)",
       "folder": "RP2040",
       "driverURL": "https://github.com/grblHAL/RP2040"
-  }
+    },
+    {
+      "name": "Simulator",
+      "folder": "Simulator",
+      "driverURL": "https://github.com/grblHAL/Simulator"
+    }
   ],
+  "default_caps": [
+    { "key": "axes",               "derived": true,  "inherited": false, "label": "Max number of axes or motors" },
+    { "key": "auto_square",        "derived": true,  "inherited": false, "label": "Max number auto squared axes" },
+    { "key": "ganged_axes",        "derived": false, "inherited": false, "label": "" },
+    { "key": "usb_cdc",            "derived": false, "inherited": true,  "label": "Native USB connection" },
+    { "key": "serial_ports",       "derived": true,  "inherited": false, "label": "Number of serial ports" },
+    { "key": "probe",              "derived": false, "inherited": true,  "label": "Probe input" },
+    { "key": "estop",              "derived": false, "inherited": true,  "label": "Reset input as emergency stop" },
+    { "key": "safety_door",        "derived": false, "inherited": true,  "label": "Safety door input" },
+    { "key": "mpg_mode",           "derived": false, "inherited": false, "label": "MPG mode input" },
+    { "key": "motor_warning",      "derived": false, "inherited": false, "label": "Motor warning input" },
+    { "key": "motor_fault",        "derived": false, "inherited": false, "label": "Motor fault input" },
+    { "key": "modbus",             "derived": true,  "inherited": false, "label": "ModBus support" },
+    { "key": "i2c_strobe",         "derived": false, "inherited": false, "label": "I2C strobe input" },
+    { "key": "digital_in",         "derived": false, "inherited": false, "label": "Number of digital inputs" },
+    { "key": "digital_out",        "derived": false, "inherited": false, "label": "Number of digital outputs" },
+    { "key": "analog_in",          "derived": false, "inherited": false, "label": "Number of analog inputs" },
+    { "key": "analog_out",         "derived": false, "inherited": false, "label": "Number of analog outputs" },
+    { "key": "analog_pwm_out",     "derived": false, "inherited": false, "label": "Number of analog PWM outputs" },
+    { "key": "rgb_out",            "derived": false, "inherited": false, "label": "RGB LED support" },
+    { "key": "neopixels",          "derived": false, "inherited": false, "label": "Neopixel support" },
+    { "key": "eeprom",             "derived": false, "inherited": false, "label": "I2C EEPROM/FRAM supported" },
+    { "key": "sdcard",             "derived": false, "inherited": false, "label": "SD card" },
+    { "key": "littlefs",           "derived": false, "inherited": true,  "label": "Flash based filing system" },
+    { "key": "i2c",                "derived": true,  "inherited": false, "label": "I2C port" },
+    { "key": "networking",         "derived": true,  "inherited": false, "label": "" },
+    { "key": "ethernet",           "derived": false, "inherited": false, "label": "Ethernet" },
+    { "key": "wiznet",             "derived": false, "inherited": false, "label": "Wiznet ethernet module" },
+    { "key": "wifi",               "derived": false, "inherited": false, "label": "WiFi" },
+    { "key": "bluetooth",          "derived": false, "inherited": false, "label": "Native Bluetooth" },
+    { "key": "pwm_spindle_aux",    "derived": false, "inherited": false, "label": "" },
+    { "key": "trinamic_spi_cs",    "derived": false, "inherited": false, "label": "" },
+    { "key": "trinamic_spi_chain", "derived": false, "inherited": false, "label": "" },
+    { "key": "trinamic_uart_n",    "derived": false, "inherited": false, "label": "" },
+    { "key": "trinamic_uart_addr", "derived": false, "inherited": false, "label": "" }
+  ],   
   "tabs": [
     { "tab_id": 0, "name": "General" },
     { "tab_id": 1, "name": "Plugins" },
     { "tab_id": 2, "name": "Network/WebUI" },
     { "tab_id": 3, "name": "Advanced features" },
-    { "tab_id": 4, "name": "3rd party plugins" }
+    { "tab_id": 4, "name": "3rd party plugins" },
+    { "tab_id": 5, "name": "Optional inputs" }
   ],
   "resource_monitor": [
     "axes",
@@ -97,7 +139,6 @@
       ]
     },
     { "id": "probe", "name": "Probe input", "symbol": { "name": "PROBE_ENABLE", "type": "bool" }, "resources": { "probe": 1 } },
-    { "id": "safety_door", "name": "Safety door input", "symbol": { "name": "SAFETY_DOOR_ENABLE", "type": "bool" }, "resources": { "safety_door": 1 } },
     { "id": "compat_level", "tab_id": 3, "name": "Compatibility level", "symbol": { "name": "COMPATIBILITY_LEVEL", "type": "dropdown" }, "URL": "https://github.com/grblHAL/core/wiki/Compatibility-level",
       "options": [
         { "name": "grblHAL", "symbol": { "name": "COMPATIBILITY_LEVEL" } },
@@ -119,6 +160,8 @@
     { "id": "disable_rst_all", "tab_id": 3, "name": "Disable $RST=*, reset all settings", "symbol": { "name": "ENABLE_RESTORE_NVS_WIPE_ALL", "type": "bool" } },
     { "id": "disable_rst_dflt", "tab_id": 3, "name": "Disable $RST=$, reset core settings", "symbol": { "name": "ENABLE_RESTORE_NVS_DEFAULT_SETTINGS", "type": "bool" } },
     { "id": "sleep", "tab_id": 3, "name": "Sleep mode", "symbol": { "name": "DEFAULT_SLEEP_ENABLE", "type": "bool" } },
+    { "id": "spindle_linearization", "tab_id": 3, "name": "Spindle linearization", "symbol": { "name": "ENABLE_SPINDLE_LINEARIZATION", "type": "bool" } },
+    { "id": "lathe_uvw_mode", "tab_id": 3, "name": "Lathe UVW mode", "symbol": { "name": "LATHE_UVW_OPTION", "type": "bool" }, "URL": "https://www.cnctrainingcentre.com/haas-turn/u-and-w-on-a-cnc-lathe-incremental-programming/" },
     { "id": "spindle_sync", "tab_id": 3, "name": "Spindle sync", "symbol": { "name": "SPINDLE_SYNC_ENABLE", "type": "bool" }, "URL": "https://github.com/grblHAL/core/wiki/Spindle-sync",
       "resources": { "spindle_sync": 1 },
       "options": [
@@ -141,13 +184,55 @@
       ]
     }
   ],
+  "spindles": [
+    { "id": "pwm", "name": "PWM", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 11 }, "is_driver_spindle": 1,
+      "resources": { "spindle_pwm": 1, "spindle_dir": 1, "modbus_rtu": 0 }
+    },
+    { "id": "pwmnodir", "name": "PWM (no direction)", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 12 }, "is_driver_spindle": 1,
+      "resources": { "spindle_pwm": 1, "spindle_dir": 0, "modbus_rtu": 0 }
+    },
+    { "id": "pwmclone", "name": "PWM cloned", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 17 }, "is_driver_spindle": 1,
+      "resources": { "spindle_pwm": 1, "spindle_dir": 1, "modbus_rtu": 0 }
+    },
+    { "id": "onoff", "name": "On/Off", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 7 }, "is_driver_spindle": 1,
+      "resources": { "spindle_pwm": 0, "spindle_dir": 0, "modbus_rtu": 0 }
+    },
+    { "id": "onoffdir", "name": "On/Off + dir", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 8 }, "is_driver_spindle": 1,
+      "resources": { "spindle_pwm": 0, "spindle_dir": 1, "modbus_rtu": 0 }
+    },
+    { "id": "huanyang1", "name": "Huanyang v1", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 1 }, "is_driver_spindle": 0,
+      "resources": { "spindle_pwm": 0, "spindle_dir": 0, "modbus_rtu": 1 }
+    },
+    { "id": "huanyang2", "name": "Huanyang P2A", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 2 }, "is_driver_spindle": 0,
+      "resources": { "spindle_pwm": 0, "spindle_dir": 0, "modbus_rtu": 1 }
+    },
+    { "id": "gs20", "name": "Durapulse GS20", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 3 }, "is_driver_spindle": 0,
+      "resources": { "spindle_pwm": 0, "spindle_dir": 0, "modbus_rtu": 1 }
+    },
+    { "id": "ys620", "name": "Yalang YS620", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 4 }, "is_driver_spindle": 0,
+      "resources": { "spindle_pwm": 0, "spindle_dir": 0, "modbus_rtu": 1 }
+    },
+    { "id": "modvfd", "name": "MODVFD", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 5 }, "is_driver_spindle": 0,
+      "resources": { "spindle_pwm": 0, "spindle_dir": 0, "modbus_rtu": 1 }
+    },
+    { "id": "h100", "name": "H-100", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 6 }, "is_driver_spindle": 0,
+      "resources": { "spindle_pwm": 0, "spindle_dir": 0, "modbus_rtu": 1 }
+    },
+    { "id": "nowforever", "name": "NowForever", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 20 }, "is_driver_spindle": 0,
+      "resources": { "spindle_pwm": 0, "spindle_dir": 0, "modbus_rtu": 1 }
+    },
+    { "id": "spdall", "name": "All", "symbol": { "name": "SPINDLE_N_ENABLE", "value": -1 }, "is_driver_spindle": 0,
+      "resources": { "spindle_pwm": 0, "spindle_dir": 0, "modbus_rtu": 1 }
+    }
+  ],
   "plugins": [
     { "id": "motors", "name": "Trinamic drivers", "symbol": { "name": "TRINAMIC_ENABLE", "type": "dropdown" }, "URL": "https://github.com/grblHAL/Plugins_motor/",
       "options": [
         { "name": "Disabled", "symbol": { "name": "TRINAMIC_ENABLE" }, "resources": { "serial_ports": 0, "soft_uart": 0, "spi": 0 } },
-        { "name": "TMC2130", "symbol": { "name": "TRINAMIC_ENABLE", "value": 2130 }, "tmc_com": "spi" },
-        { "name": "TMC2209", "symbol": { "name": "TRINAMIC_ENABLE", "value": 2209 }, "tmc_com": "uart" },
-        { "name": "TMC5160", "symbol": { "name": "TRINAMIC_ENABLE", "value": 5160 }, "tmc_com": "spi" }
+        { "name": "TMC2130, R sense: 110 mΩ", "symbol": { "name": "TRINAMIC_ENABLE", "value": 2130 }, "tmc_com": "spi" },
+        { "name": "TMC2209, R sense: 110 mΩ", "symbol": { "name": "TRINAMIC_ENABLE", "value": 2209 }, "tmc_com": "uart" },
+        { "name": "TMC5160, R sense: 75 mΩ", "symbol": { "name": "TRINAMIC_ENABLE", "value": 5160 }, "tmc_com": "spi" },
+        { "name": "TMC5160, R sense: 50 mΩ", "symbol": { "name": "TRINAMIC_ENABLE", "value": 5160 }, "tmc_com": "spi", "tmc_r_sense": 50 }
       ]
     },
     { "id": "motors", "name": "Trinamic mode", "symbol": { "name": "TRINAMIC_MODE", "type": "dropdown" },
@@ -169,20 +254,28 @@
       ]
     },
     { "id": "eeprom", "tab_id": 1, "name": "EEPROM is FRAM", "symbol": {"name": "EEPROM_IS_FRAM", "type": "bool" } },
-    { "id": "spindle", "name": "Spindle", "symbol": { "name": "N_SPINDLE", "type": "dropdown" }, "URL": "https://github.com/grblHAL/Plugins_spindle/",
+    { "id": "spindle", "name": "Spindle 1", "symbol": { "name": "SPINDLE0_ENABLE", "type": "dropdown" }, "URL": "https://github.com/grblHAL/Plugins_spindle/",
       "options": [
-        { "id": "pwm", "name": "PWM", "symbol": { "name": "VFD_ENABLE" }, "resources": { "pwm_spindle": 1, "serial_ports": 0 } },
-        { "id": "vfdall", "name": "All", "symbol": { "name": "VFD_ENABLE", "value": -1 } },
-        { "id": "vfd1", "name": "Huanyang v1", "symbol": { "name": "VFD_ENABLE", "value": 1 } },
-        { "id": "vfd2", "name": "Huanyang P2A", "symbol": { "name": "VFD_ENABLE", "value": 2 } },
-        { "id": "vfd3", "name": "Durapulse GS20", "symbol": { "name": "VFD_ENABLE", "value": 3 } },
-        { "id": "vfd4", "name": "Yalang YS620", "symbol": { "name": "VFD_ENABLE", "value": 4 } },
-        { "id": "vfd5", "name": "MODVFD", "symbol": { "name": "VFD_ENABLE", "value": 5 } },
-        { "id": "vfd6", "name": "H-100", "symbol": { "name": "VFD_ENABLE", "value": 6 } }
+        { "id": "none", "name": "Disabled", "symbol": { "name": "SPINDLE0_ENABLE", "value": 0 }, "resources": { "serial_ports": 0 } }
+     ]
+    },
+    { "id": "spindle", "name": "Spindle 2", "symbol": { "name": "SPINDLE1_ENABLE", "type": "dropdown" }, "URL": "https://github.com/grblHAL/Plugins_spindle/",
+      "options": [
+        { "id": "none", "name": "Disabled", "symbol": { "name": "SPINDLE1_ENABLE", "value": 0 }, "resources": { "serial_ports": 0 } }
       ]
     },
-    { "id": "spindle", "name": "Add PWM spindle", "symbol": { "name": "PWM_ADD", "type": "bool" } },
-    { "id": "modbus", "name": "ModBus", "symbol": { "name": "MODBUS_ENABLE", "type": "dropdown" }, "URL": "https://github.com/grblHAL/Plugins_spindle/",
+    { "id": "spindle", "name": "Spindle 3", "symbol": { "name": "SPINDLE2_ENABLE", "type": "dropdown" }, "URL": "https://github.com/grblHAL/Plugins_spindle/",
+      "options": [
+        { "id": "none", "name": "Disabled", "symbol": { "name": "SPINDLE2_ENABLE", "value": 0 }, "resources": { "serial_ports": 0 } }
+      ]
+    },
+    { "id": "spindle", "name": "Spindle 4", "symbol": { "name": "SPINDLE3_ENABLE", "type": "dropdown" }, "URL": "https://github.com/grblHAL/Plugins_spindle/",
+      "options": [
+        { "id": "none", "name": "Disabled", "symbol": { "name": "SPINDLE3_ENABLE", "value": 0 }, "resources": { "serial_ports": 0 } }
+      ]
+    },
+    { "id": "spindle", "name": "Enable selected spindles simultaneously", "symbol": { "name": "N_SYS_SPINDLE", "type": "bool" } },
+    { "id": "modbus", "name": "ModBus RTU", "symbol": { "name": "MODBUS_ENABLE", "type": "dropdown" }, "URL": "https://github.com/grblHAL/Plugins_spindle/",
       "resources": { "serial_ports": 1 }, 
       "options": [
         { "id": "modbusoff", "name": "Disabled", "symbol": { "name": "MODBUS_BAUDRATE", "value": -1 }, "resources": { "serial_ports": 0 } },
@@ -291,6 +384,16 @@
     { "id": "embroidery", "tab_id": 1, "name": "Embroidery", "symbol": { "name": "EMBROIDERY_ENABLE", "type": "bool" }, "URL": "https://github.com/grblHAL/Plugin_embroidery/",
       "resources": { "sdcard": 1 }
     }
+  ],
+  "signals": [
+      { "id": "safety_door", "name": "Safety door", "symbol": { "name": "SAFETY_DOOR_ENABLE", "type": "bool" }, "resources": { "safety_door": 1, "digital_in": 1  } },
+      { "id": "limits_override", "name": "Limits override", "symbol": { "name": "LIMITS_OVERRIDE_ENABLE", "type": "bool" }, "resources": { "digital_in": 1 } },
+      { "id": "single_stepping", "name": "Single step G-code blocks", "symbol": { "name": "SINGLE_BLOCK_ENABLE", "type": "bool" }, "resources": { "digital_in": 1 } },
+      { "id": "block_delete", "name": "Block delete", "symbol": { "name": "BLOCK_DELETE_ENABLE", "type": "bool" }, "resources": { "digital_in": 1 } },
+      { "id": "stop_disable", "name": "Optional stop disable", "symbol": { "name": "STOP_DISABLE_ENABLE", "type": "bool" }, "resources": { "digital_in": 1 } },
+      { "id": "probe_disconnect", "name": "Probe disconnected", "symbol": { "name": "PROBE_DISCONNECT_ENABLE", "type": "bool" }, "resources": { "digital_in": 1 } },
+      { "id": "motor_fault", "name": "Motor fault", "symbol": { "name": "MOTOR_FAULT_ENABLE", "type": "bool" }, "resources": { "motor_fault": 1, "digital_in": 1 } },
+      { "id": "motor_warning", "name": "Motor warning", "symbol": { "name": "MOTOR_WARNING_ENABLE", "type": "bool" }, "resources": { "motor_warning": 1, "digital_in": 1 } }
   ],
   "thirdparty": [
     { "id": "datron", "tab_id": 4, "name": "Datron lights", "symbol": { "name": "STATUS_LIGHT_ENABLE", "type": "bool" }, "thirdparty": 1, "URL": "https://github.com/5ocworkshop/grblhal-rgb-plugin",
