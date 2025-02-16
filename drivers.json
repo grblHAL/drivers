@@ -154,7 +154,7 @@
         { "name": "Grbl complete (10)", "symbol": { "name": "COMPATIBILITY_LEVEL", "value": 10 } }
       ]
     },
-    { "id": "compat_level", "tab_id": 3, "name": "Reset input as E-Stop", "symbol": { "name": "ESTOP_ENABLE", "type": "bool" }, "resources": { "estop": 1 } },
+    { "id": "e_stop", "tab_id": 3, "name": "Reset input as E-Stop", "symbol": { "name": "ESTOP_ENABLE", "type": "bool" }, "resources": { "estop": 1 } },
     { "id": "tool_offset", "tab_id": 3, "name": "TLO report", "symbol": { "name": "TOOL_LENGTH_OFFSET_AXIS", "type": "dropdown" },
       "options": [
         { "name": "All axes", "symbol": { "name": "TOOL_LENGTH_OFFSET_AXIS" } },
@@ -163,8 +163,30 @@
         { "name": "Y-axis", "symbol": { "name": "TOOL_LENGTH_OFFSET_AXIS", "value": 1 } }
       ]
     },
-    { "id": "jerk", "tab_id": 3, "name": "Third order acceleration (jerk)", "symbol": { "name": "ENABLE_JERK_ACCELERATION", "type": "bool" }, "URL": "https://github.com/grblHAL/core/discussions/384" },
-    { "id": "g187", "tab_id": 3, "name": "G187 acceleration profiles", "symbol": { "name": "ENABLE_ACCELERATION_PROFILES", "type": "bool" }, "URL": "https://github.com/grblHAL/core/discussions/384" },
+    { "id": "tooltable", "tab_id": 3, "name": "Tool table", "symbol": {"name": "N_TOOLS", "type": "dropdown" },
+      "options": [
+        { "name": "No", "symbol": { "name": "N_TOOLS" } },
+        { "name": "8 tools", "symbol": { "name": "N_TOOLS", "value": 8 } },
+        { "name": "12 tools", "symbol": { "name": "N_TOOLS", "value": 12 } },
+        { "name": "16 tools", "symbol": { "name": "N_TOOLS", "value": 16 } },
+        { "name": "24 tools", "symbol": { "name": "N_TOOLS", "value": 24 } },
+        { "name": "32 tools", "symbol": { "name": "N_TOOLS", "value": 32 } }
+      ]
+    },
+    { "id": "jerk", "tab_id": 3, "name": "Third order acceleration (jerk)", "symbol": { "name": "ENABLE_JERK_ACCELERATION", "type": "bool" }, "URL": "https://github.com/grblHAL/core/wiki/Jerk-acceleration",
+      "options": [
+        { "id": "atps", "name": "Accel. tics per second", "symbol": { "name": "ACCELERATION_TICKS_PER_SECOND", "type": "dropdown", "value": 100 },
+           "options": [
+            { "name": "Default (100)", "symbol": { "name": "ACCELERATION_TICKS_PER_SECOND", "value": 100 } },
+            { "name": "200", "symbol": { "name": "ACCELERATION_TICKS_PER_SECOND", "value": 200 }, "symbols": [ { "name": "SEGMENT_BUFFER_SIZE", "value": "20" } ] },
+            { "name": "300", "symbol": { "name": "ACCELERATION_TICKS_PER_SECOND", "value": 300 }, "symbols": [ { "name": "SEGMENT_BUFFER_SIZE", "value": "30" } ] },
+            { "name": "400", "symbol": { "name": "ACCELERATION_TICKS_PER_SECOND", "value": 400 }, "symbols": [ { "name": "SEGMENT_BUFFER_SIZE", "value": "40" } ] },
+            { "name": "500", "symbol": { "name": "ACCELERATION_TICKS_PER_SECOND", "value": 500 }, "symbols": [ { "name": "SEGMENT_BUFFER_SIZE", "value": "50" } ] }
+          ]
+        } 
+      ]
+    },
+    { "id": "g187", "tab_id": 3, "name": "G187 acceleration profiles", "symbol": { "name": "ENABLE_ACCELERATION_PROFILES", "type": "bool" }, "URL": "https://github.com/grblHAL/core/wiki/Jerk-acceleration" },
     { "id": "backlash_comp", "tab_id": 3, "name": "Backlash compensation", "symbol": { "name": "ENABLE_BACKLASH_COMPENSATION", "type": "bool" } },
     { "id": "disable_rst_all", "tab_id": 3, "name": "Disable $RST=*, reset all settings", "symbol": { "name": "ENABLE_RESTORE_NVS_WIPE_ALL", "type": "bool" } },
     { "id": "disable_rst_dflt", "tab_id": 3, "name": "Disable $RST=$, reset core settings", "symbol": { "name": "ENABLE_RESTORE_NVS_DEFAULT_SETTINGS", "type": "bool" } },
@@ -207,11 +229,17 @@
     { "id": "pwmnodir", "name": "PWM (no direction)", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 12 }, "is_driver_spindle": 1,
       "resources": { "spindle_pwm": 1, "spindle_dir": 0, "modbus_rtu": 0 }
     },
-    { "id": "pwm2", "name": "PWM 2", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 15 }, "is_driver_spindle": 1,
+    { "id": "pwm2", "name": "PWM 2", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 13 }, "is_driver_spindle": 1,
       "resources": { "spindle_pwm": 2, "spindle_dir": 0, "modbus_rtu": 0 }
     },
-    { "id": "pwm2_nodir", "name": "PWM 2 (no direction)", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 16 }, "is_driver_spindle": 1,
+    { "id": "pwm2_nodir", "name": "PWM 2 (no direction)", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 14 }, "is_driver_spindle": 1,
       "resources": { "spindle_pwm": 2, "spindle_dir": 1, "modbus_rtu": 0 }
+    },
+    { "id": "pwm3", "name": "PWM 3", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 15 }, "is_driver_spindle": 0,
+      "resources": { "spindle_pwm": 3, "spindle_dir": 0, "modbus_rtu": 0 }
+    },
+    { "id": "pwm3_nodir", "name": "PWM 3 (no direction)", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 16 }, "is_driver_spindle": 0,
+      "resources": { "spindle_pwm": 3, "spindle_dir": 1, "modbus_rtu": 0 }
     },
     { "id": "pwmclone", "name": "PWM cloned", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 17 }, "is_driver_spindle": 1,
       "resources": { "spindle_pwm": 1, "spindle_dir": 1, "modbus_rtu": 0 }
@@ -252,10 +280,11 @@
       "options": [
         { "name": "Disabled", "symbol": { "name": "TRINAMIC_ENABLE" }, "resources": { "serial_ports": 0, "soft_uart": 0, "spi": 0 } },
         { "name": "TMC2130, R sense: 110 mΩ", "symbol": { "name": "TRINAMIC_ENABLE", "value": 2130 }, "tmc_com": "spi", "trinamic_r_sense": 110 },
-        { "name": "TMC2209, R sense: 110 mΩ", "symbol": { "name": "TRINAMIC_ENABLE", "value": 2209 }, "tmc_com": "uart", "trinamic_r_sense": 10 },
+        { "name": "TMC2209, R sense: 110 mΩ", "symbol": { "name": "TRINAMIC_ENABLE", "value": 2209 }, "tmc_com": "uart", "trinamic_r_sense": 110 },
         { "name": "TMC2660, R sense: 50 mΩ", "symbol": { "name": "TRINAMIC_ENABLE", "value": 2660 }, "tmc_com": "spi", "trinamic_r_sense": 50 },
         { "name": "TMC5160, R sense: 75 mΩ", "symbol": { "name": "TRINAMIC_ENABLE", "value": 5160 }, "tmc_com": "spi", "trinamic_r_sense": 75 },
-        { "name": "TMC5160, R sense: 50 mΩ", "symbol": { "name": "TRINAMIC_ENABLE", "value": 5160 }, "tmc_com": "spi", "trinamic_r_sense": 50 }
+        { "name": "TMC5160, R sense: 50 mΩ", "symbol": { "name": "TRINAMIC_ENABLE", "value": 5160 }, "tmc_com": "spi", "trinamic_r_sense": 50 },
+        { "name": "TMC5160, R sense: 22 mΩ", "symbol": { "name": "TRINAMIC_ENABLE", "value": 5160 }, "tmc_com": "spi", "trinamic_r_sense": 22 }
       ]
     },
     { "id": "motors", "name": "Trinamic mode", "symbol": { "name": "TRINAMIC_MODE", "type": "dropdown" },
@@ -460,12 +489,6 @@
       { "id": "mcp3221_adc", "name": "MCP3221 I2C ADC", "symbol": { "name": "MCP3221_ENABLE", "type": "bool" }, "resources": { "mcp3221_adc": 1, "i2c": 1 } }
   ],
   "thirdparty": [
-    { "id": "datron", "tab_id": 4, "name": "Datron lights", "symbol": { "name": "STATUS_LIGHT_ENABLE", "type": "bool", "value": 1 }, "thirdparty": 1, "URL": "https://github.com/5ocworkshop/grblhal-rgb-plugin",
-      "resources": { "digital_out": 3 }
-    },
-    { "id": "sienci_rgb", "tab_id": 4, "name": "Sienci RGB lights", "symbol": { "name": "STATUS_LIGHT_ENABLE", "type": "bool", "value": 2 }, "thirdparty": 1, "URL": "https://github.com/Sienci-Labs/grblhal-rgb-plugin",
-      "resources": { "rgb_out": 1 }
-    },
     { "id": "panel", "tab_id": 4, "name": "Panel", "symbol": { "name": "PANEL_ENABLE", "type": "bool" }, "thirdparty": 1, "URL": "https://github.com/dresco/Plugin_panel",
       "resources": { "modbus_rtu": 1 },
       "symbols": [ { "name": "MODBUS_MAX_ADU_SIZE", "value": "64" } ]
@@ -479,6 +502,17 @@
     { "id": "fh_atc", "tab_id": 4, "name": "FlexiHAL ATC", "symbol": { "name": "FLEXIHAL_ATC", "type": "bool", "hide": 1 }, "thirdparty": 1, "URL": "https://github.com/Expatria-Technologies/flexihal_atc",
       "resources": { "digital_in": 3,  "digital_out": 4 },
       "symbols": [ { "name": "ATC_ENABLE", "value": "2" } ]
+    },
+    { "id": "status_lights", "tab_id": 4, "name": "Status lights", "symbol": { "name": "STATUS_LIGHT_ENABLE", "type": "dropdown" }, "thirdparty": 1,
+      "options": [
+        { "name": "Disabled", "symbol": { "name": "STATUS_LIGHT_ENABLE" } },
+        { "id": "datron", "tab_id": 4, "name": "Datron style", "symbol": { "name": "STATUS_LIGHT_ENABLE", "value": 1 }, "thirdparty": 1, "URL": "https://github.com/5ocworkshop/grblhal-rgb-plugin",
+          "resources": { "digital_out": 3 }
+        },
+        { "id": "sienci_rgb", "tab_id": 4, "name": "Sienci lights", "symbol": { "name": "STATUS_LIGHT_ENABLE", "value": 2 }, "thirdparty": 1, "URL": "https://github.com/Sienci-Labs/grblhal-rgb-plugin",
+          "resources": { "rgb_out": 1 }
+        }
+       ]
     },
     { "id": "templates", "tab_id": 4, "name": "Template plugins", "symbol": { "name": "TEMPLATE_ENABLE", "type": "dropdown" }, "thirdparty": 1, "URL": "https://github.com/grblHAL/Templates/tree/master/my_plugin",
       "options": [
