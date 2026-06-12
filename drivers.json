@@ -4,6 +4,11 @@
       "name": "Sienci",
       "vendorURL": "https://sienci.com",
       "profilesURL": "https://github.com/Sienci-Labs/grblhal-profiles/"
+	  },
+    { 
+      "name": "OpenBuilds",
+      "vendorURL": "https://builds.openbuilds.com/",
+      "profilesURL": "https://github.com/petervanderwalt/openbuilds-grblhal-profiles/"
 	  }
   ],
   "drivers": [
@@ -114,6 +119,7 @@
     "motors",
     "driver_spindle1",
     "driver_spindle2",
+    "driver_spindle3",
     "auto_square",
     "serial_ports",
     "analog_in",
@@ -244,16 +250,16 @@
       "resources": { "driver_spindle1": 1, "spindle_pwm": 1, "spindle_dir": 0, "modbus_rtu": 0 }
     },
     { "id": "pwm2", "name": "PWM 2", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 13 }, "is_driver_spindle": 2,
-      "resources": { "driver_spindle2": 1, "spindle_pwm": 2, "spindle_dir": 0, "modbus_rtu": 0 }
+      "resources": { "driver_spindle2": 1, "spindle_pwm1": 2, "spindle_dir": 0, "modbus_rtu": 0 }
     },
     { "id": "pwm2_nodir", "name": "PWM 2 (no direction)", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 14 }, "is_driver_spindle": 2,
-      "resources": { "driver_spindle2": 1, "spindle_pwm": 2, "spindle_dir": 1, "modbus_rtu": 0 }
+      "resources": { "driver_spindle2": 1, "spindle_pwm1": 2, "spindle_dir": 1, "modbus_rtu": 0 }
     },
     { "id": "pwm3", "name": "PWM 3", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 15 }, "is_driver_spindle": 0,
-      "resources": { "spindle_pwm": 3, "spindle_dir": 0, "modbus_rtu": 0 }
+      "resources": { "driver_spindle3": 1,  "spindle_pwm2": 3, "spindle_dir": 0, "modbus_rtu": 0 }
     },
     { "id": "pwm3_nodir", "name": "PWM 3 (no direction)", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 16 }, "is_driver_spindle": 0,
-      "resources": { "spindle_pwm": 3, "spindle_dir": 1, "modbus_rtu": 0 }
+      "resources": { "driver_spindle3": 1,  "spindle_pwm2": 3, "spindle_dir": 1, "modbus_rtu": 0 }
     },
     { "id": "pwmclone", "name": "PWM cloned", "symbol": { "name": "SPINDLE_N_ENABLE", "value": 17 }, "is_driver_spindle": 1,
       "resources": { "spindle_pwm": 1, "spindle_dir": 1, "modbus_rtu": 0 }
@@ -514,22 +520,22 @@
     { "id": "reset", "name": "Reset/E-Stop", "symbol": { "name": "CONTROL_ENABLE_RST", "type": "bool", "hide": 1 }, "resources": { "control_inputs": 1 },
 	    "symbols": [ { "name": "CONTROL_INPUT", "value": 1, "hide": 1 } ]
 	  },
-      { "id": "feed_hold", "name": "Feed hold", "symbol": { "name": "CONTROL_ENABLE_FH", "type": "bool", "hide": 1 }, "resources": { "control_inputs": 1 },
-		"symbols": [ { "name": "CONTROL_INPUT", "value": 2, "hide": 1 } ]
+    { "id": "feed_hold", "name": "Feed hold", "symbol": { "name": "CONTROL_ENABLE_FH", "type": "bool", "hide": 1 }, "resources": { "control_inputs": 1 },
+      "symbols": [ { "name": "CONTROL_INPUT", "value": 2, "hide": 1 } ]
 	  },
-      { "id": "cycle_start", "name": "Cycle start", "symbol": { "name": "CONTROL_ENABLE_CS", "type": "bool", "hide": 1 }, "resources": { "control_inputs": 1 },
+    { "id": "cycle_start", "name": "Cycle start", "symbol": { "name": "CONTROL_ENABLE_CS", "type": "bool", "hide": 1 }, "resources": { "control_inputs": 1 },
 	    "symbols": [ { "name": "CONTROL_INPUT", "value": 4, "hide": 1 } ]
 	  },
-      { "id": "safety_door", "name": "Safety door", "symbol": { "name": "SAFETY_DOOR_ENABLE", "type": "bool" }, "resources": { "safety_door": 1, "digital_in": 1  } },
-      { "id": "toolsetter", "name": "Toolsetter", "symbol": { "name": "TOOLSETTER_ENABLE", "type": "bool" }, "resources": { "digital_in": 1  } },
-      { "id": "second_probe", "name": "Second probe", "symbol": { "name": "PROBE2_ENABLE", "type": "bool" }, "resources": { "digital_in": 1  } },
-      { "id": "limits_override", "name": "Limits override", "symbol": { "name": "LIMITS_OVERRIDE_ENABLE", "type": "bool" }, "resources": { "digital_in": 1 } },
-      { "id": "single_stepping", "name": "Single step G-code blocks", "symbol": { "name": "SINGLE_BLOCK_ENABLE", "type": "bool" }, "resources": { "digital_in": 1 } },
-      { "id": "block_delete", "name": "Block delete", "symbol": { "name": "BLOCK_DELETE_ENABLE", "type": "bool" }, "resources": { "digital_in": 1 } },
-      { "id": "stop_disable", "name": "Optional stop disable", "symbol": { "name": "STOP_DISABLE_ENABLE", "type": "bool" }, "resources": { "digital_in": 1 } },
-      { "id": "probe_disconnect", "name": "Probe disconnected", "symbol": { "name": "PROBE_DISCONNECT_ENABLE", "type": "bool" }, "resources": { "digital_in": 1 } },
-      { "id": "motor_fault", "name": "Motor fault", "symbol": { "name": "MOTOR_FAULT_ENABLE", "type": "bool" }, "resources": { "motor_fault": 1, "digital_in": 1 } }, 
-      { "id": "motor_warning", "name": "Motor warning", "symbol": { "name": "MOTOR_WARNING_ENABLE", "type": "bool" }, "resources": { "motor_warning": 1, "digital_in": 1 } }
+    { "id": "safety_door", "name": "Safety door", "symbol": { "name": "SAFETY_DOOR_ENABLE", "type": "bool" }, "resources": { "safety_door": 1, "digital_in": 1  } },
+    { "id": "toolsetter", "name": "Toolsetter", "symbol": { "name": "TOOLSETTER_ENABLE", "type": "bool" }, "resources": { "digital_in": 1  } },
+    { "id": "second_probe", "name": "Second probe", "symbol": { "name": "PROBE2_ENABLE", "type": "bool" }, "resources": { "digital_in": 1  } },
+    { "id": "limits_override", "name": "Limits override", "symbol": { "name": "LIMITS_OVERRIDE_ENABLE", "type": "bool" }, "resources": { "digital_in": 1 } },
+    { "id": "single_stepping", "name": "Single step G-code blocks", "symbol": { "name": "SINGLE_BLOCK_ENABLE", "type": "bool" }, "resources": { "digital_in": 1 } },
+    { "id": "block_delete", "name": "Block delete", "symbol": { "name": "BLOCK_DELETE_ENABLE", "type": "bool" }, "resources": { "digital_in": 1 } },
+    { "id": "stop_disable", "name": "Optional stop disable", "symbol": { "name": "STOP_DISABLE_ENABLE", "type": "bool" }, "resources": { "digital_in": 1 } },
+    { "id": "probe_disconnect", "name": "Probe disconnected", "symbol": { "name": "PROBE_DISCONNECT_ENABLE", "type": "bool" }, "resources": { "digital_in": 1 } },
+    { "id": "motor_fault", "name": "Motor fault", "symbol": { "name": "MOTOR_FAULT_ENABLE", "type": "bool" }, "resources": { "motor_fault": 1, "digital_in": 1 } }, 
+    { "id": "motor_warning", "name": "Motor warning", "symbol": { "name": "MOTOR_WARNING_ENABLE", "type": "bool" }, "resources": { "motor_warning": 1, "digital_in": 1 } }
   ],
   "io_expansion": [
       { "id": "mcp3221_adc", "name": "MCP3221 I2C ADC", "symbol": { "name": "MCP3221_ENABLE", "type": "bool" }, "resources": { "i2c_ports": 1 } },
