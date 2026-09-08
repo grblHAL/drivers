@@ -6,9 +6,19 @@
       "profilesURL": "https://github.com/Sienci-Labs/grblhal-profiles/"
 	  },
     { 
+      "name": "Ooznest",
+      "vendorURL": "https://https://ooznest.co.uk/",
+      "profilesURL": "https://github.com/ooznest/grblhal-profiles/"
+	  },
+    { 
       "name": "OpenBuilds",
       "vendorURL": "https://builds.openbuilds.com/",
       "profilesURL": "https://github.com/petervanderwalt/openbuilds-grblhal-profiles/"
+	  },
+    { 
+      "name": "Voron",
+      "vendorURL": "https://vorondesign.com/",
+      "profilesURL": "https://github.com/coolboysalam/grblhal-profiles/"
 	  }
   ],
   "drivers": [
@@ -224,21 +234,23 @@
       "URL": "https://github.com/grblHAL/core/wiki/Expressions-and-flow-control",
       "tooltip": "RS274 NGC + LinuxCNC extensions. Conditionals, looping and subroutines are supported when streaming from a SD card."
     },
-    { "id": "rotary_fix", "tab_id": 3, "name": "Rotary axis feed rate fix", "symbol": { "name": "ROTARY_FIX", "type": "bool" }, "URL": "https://github.com/grblHAL/core/discussions/241" },
     { "id": "kinematics", "tab_id": 3, "name": "Kinematics", "symbol": { "name": "KINEMATICS_API", "type": "dropdown" },
       "options": [
         { "name": "Cartesian", "symbol": { "name": "CARTESIAN" } },
         { "name": "CoreXY", "symbol": { "name": "COREXY", "value": "1" } },
         { "name": "Delta", "symbol": { "name": "DELTA_ROBOT", "value": "1" } },
         { "name": "Polar", "symbol": { "name": "POLAR_ROBOT", "value": "1" } },
-        { "name": "Wall plotter", "symbol": { "name": "WALL_PLOTTER", "value": "1" } }
+        { "name": "Wall plotter", "symbol": { "name": "WALL_PLOTTER", "value": "1" } },
+        { "name": "Asymmetric auto squared Y", "symbol": { "name": "ASYMMETRIC_AUTO_SQUARE", "value": "1" } },
+        { "name": "Asymmetric ganged Y", "symbol": { "name": "ASYMMETRIC_GANGING", "value": "1" } }
       ]
     },
-    { "id": "mpgdro", "tab_id": 1, "name": "MPG & DRO mode", "symbol": { "name": "MPG_ENABLE", "type": "dropdown" }, "URL": "https://github.com/grblHAL/core/wiki/MPG-and-DRO-interfaces",
+    { "id": "mpgdro", "tab_id": 1, "name": "MPG & DRO mode", "symbol": { "name": "MPG_ENABLE", "type": "dropdown" },
        "options": [
         { "name": "Disabled", "symbol": { "name": "MPG_ENABLE" }, "resources": { "serial_ports": 0 } },
-        { "name": "Auxiliary input switchover", "symbol": { "name": "MPG_ENABLE", "value": 1 }, "resources": { "digital_in": 1, "serial_ports": 1 } },
-        { "name": "Real time command switchover", "symbol": { "name": "MPG_ENABLE", "value": 2 }, "resources": { "serial_ports": 1 } }
+        { "name": "Auxiliary input switchover", "symbol": { "name": "MPG_ENABLE", "value": 1 }, "resources": { "digital_in": 1, "serial_ports": 1 }, "URL": "https://github.com/grblHAL/core/wiki/MPG-and-DRO-interfaces" },
+        { "name": "Real time command switchover", "symbol": { "name": "MPG_ENABLE", "value": 2 }, "resources": { "serial_ports": 1 }, "URL": "https://github.com/grblHAL/core/wiki/MPG-and-DRO-interfaces" },
+        { "name": "CRC ensured transport", "symbol": { "name": "MPG_ENABLE", "value": 3 }, "resources": { "serial_ports": 1 }, "thirdparty": 1, "URL": "https://github.com/nickshl/grblHAL_mpg_transport#readme" }
       ]
     }
   ],
@@ -540,6 +552,7 @@
   "io_expansion": [
       { "id": "mcp3221_adc", "name": "MCP3221 I2C ADC", "symbol": { "name": "MCP3221_ENABLE", "type": "bool" }, "resources": { "i2c_ports": 1 } },
       { "id": "mcp4725_dac", "name": "MCP4725 I2C DAC", "symbol": { "name": "MCP4725_ENABLE", "type": "bool" }, "resources": { "i2c_ports": 1 } },
+      { "id": "mcp23017_io", "name": "MCP23017 I2C I/O expander", "symbol": { "name": "MCP23017_ENABLE", "type": "bool" }, "resources": { "i2c_ports": 1 } },
       { "id": "pca9654e_io", "name": "PCA9654E I2C I/O expander", "symbol": { "name": "PCA9654E_ENABLE", "type": "bool" }, "resources": { "i2c_ports": 1 } },
       { "id": "thcad", "name": "THCAD2", "symbol": { "name": "THCAD2_ENABLE", "type": "bool" }, "resources": { "frequency_in": 1 } },
       { "id": "fnc_expander", "name": "FluidNC Airedale expander", "symbol": { "name": "FNC_EXPANDER_ENABLE", "type": "bool" }, "URL": "https://github.com/grblHAL/Plugins_misc/#fluidnc-io-expander",
@@ -568,6 +581,12 @@
       "resources": { "digital_in": 4 },
       "symbols": [ { "name": "ATCI_ENABLE", "value": "1" } ]
     },
+    { "id": "virtual_inputs", "tab_id": 4, "name": "Virtual inputs", "symbol": { "name": "VIRTUAL_INPUTS_ENABLE", "type": "bool" }, "thirdparty": 1, "URL": "https://github.com/siganberg/grblhal-virtual-inputs#readme",
+      "symbols": [ { "name": "VIRTUAL_INPUTS_ENABLE", "value": "1" } ]
+    },
+    { "id": "homin_accel", "tab_id": 4, "name": "Homing acceleration", "symbol": { "name": "HOMING_ACCEL_ENABLE", "type": "bool" }, "thirdparty": 1, "URL": "https://github.com/Sienci-Labs/grbhal-homingaccel-plugin#readme",
+      "symbols": [ { "name": "HOMING_ACCEL_ENABLE", "value": "1" } ]
+    },
     { "id": "status_lights", "tab_id": 4, "name": "Status lights", "symbol": { "name": "STATUS_LIGHT_ENABLE", "type": "dropdown" }, "thirdparty": 1,
       "options": [
         { "name": "Disabled", "symbol": { "name": "STATUS_LIGHT_ENABLE" } },
@@ -575,6 +594,9 @@
           "resources": { "digital_out": 3 }
         },
         { "id": "sienci_rgb", "tab_id": 4, "name": "Sienci lights", "symbol": { "name": "STATUS_LIGHT_ENABLE", "value": 2 }, "thirdparty": 1, "URL": "https://github.com/Sienci-Labs/grblhal-rgb-plugin#readme",
+          "resources": { "rgb_out": 1 }
+        },
+        { "id": "sienci_rgb", "tab_id": 4, "name": "Sienci lights 2", "symbol": { "name": "STATUS_LIGHT_ENABLE", "value": 3 }, "thirdparty": 1, "URL": "https://github.com/Sienci-Labs/grblhal-rgb-plugin#readme",
           "resources": { "rgb_out": 1 }
         }
       ]
